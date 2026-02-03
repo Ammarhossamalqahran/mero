@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        
+        body {
+            background-color: #0b0b0b;
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 50px;
+        }
+
+        .bubble-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            border-radius: 25px;
+            padding: 20px;
+            margin: 20px 10px;
+            width: 85%;
+            max-width: 400px;
+            border: 1px solid rgba(255, 77, 77, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.8s ease-out;
+            text-align: center;
+        }
+
+        #lock-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+        input {
+            padding: 15px;
+            border-radius: 50px;
+            border: 2px solid #ff4d4d;
+            background: none;
+            color: white;
+            text-align: center;
+            width: 220px;
+            font-size: 1.1rem;
+            outline: none;
+            margin-bottom: 20px;
+        }
+
+        .btn-main {
+            padding: 15px 45px;
+            background: linear-gradient(45deg, #ff4d4d, #ff8080);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-main:hover { transform: scale(1.05); }
+
+        .btn-back {
+            padding: 10px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffcccc;
+            border: 1px solid #ff4d4d;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 15px;
+            height: 40px;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 20px;
+            margin: 15px 0;
+            display: block;
+        }
+
+        h3 { margin: 10px 0; font-size: 1.4rem; color: #ffcccc; }
+        p.sub-title { font-size: 1.1rem; color: #ff8080; margin-top: -5px; }
+
+        #main-content, #final-step { display: none; width: 100%; flex-direction: column; align-items: center; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .falling-heart {
+            position: fixed;
+            top: -20px;
+            color: #ff4d4d;
+            pointer-events: none;
+            animation: fall linear infinite;
+            z-index: 9999;
+        }
+        @keyframes fall { to { transform: translateY(110vh); } }
+    </style>
+</head>
+<body>
+
+    <div id="lock-screen">
+        <div class="bubble-card">
+            <h2 style="color: #ff4d4d;">أدخلي الرمز السري ❤️</h2>
+            <input type="password" id="passInput" placeholder="Password...">
+            <br>
+            <button class="btn-main" onclick="unlock()">دخول</button>
+        </div>
+    </div>
+
+    <div id="main-content">
+        
+        <div class="bubble-card">
+            <h3>أغنيتنا 🎵</h3>
+            <p class="sub-title">بعشقك</p>
+            <audio id="bgMusic" controls loop>
+                <source src="music.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div class="bubble-card">
+            <h3>بحبك يا قمر ❤️</h3>
+        </div>
+
+        <div class="bubble-card">
+            <img src="https://i.pinimg.com/736x/0a/63/05/0a630560737976e56844996924233777.jpg" alt="فلا هوى بعد هواك">
+            <p>فلا هوى بعد هواك يهتوي ♥️</p>
+        </div>
+
+        <div class="bubble-card">
+            <h3>ضحكتك وطن</h3>
+        </div>
+
+        <div class="bubble-card">
+            <img src="https://i.pinimg.com/736x/89/3e/71/893e7100000000000000000000000000.jpg" alt="كل يوم معاكي عيد">
+            <p>كل يوم معاكي عيد</p>
+            <button class="btn-main" style="width: 100%;" onclick="showFinal()">اضغطي متستعجليش</button>
+        </div>
+    </div>
+
+    <div id="final-step">
+        <div class="bubble-card" style="margin-top: 50px;">
+            <h2 style="line-height: 1.8;">
+                تغيب الشمس والناس تنام...<br>
+                ويغيب القمر ويزيد الظلام...<br>
+                ولكن تغيب أنت هذا حرام ❤️
+            </h2>
+            <button class="btn-back" onclick="goBack()">رجوع للخلف</button>
+        </div>
+    </div>
+
+    <script>
+        function unlock() {
+            const pass = document.getElementById('passInput').value;
+            if (pass === "14") {
+                document.getElementById('lock-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'flex';
+                const audio = document.getElementById('bgMusic');
+                audio.play();
+                startHearts();
+            } else {
+                alert("الرمز غلط يا قمر 😉");
+            }
+        }
+
+        function showFinal() {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('final-step').style.display = 'flex';
+            window.scrollTo(0, 0);
+        }
+
+        function goBack() {
+            document.getElementById('final-step').style.display = 'none';
+            document.getElementById('main-content').style.display = 'flex';
+        }
+
+        function startHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.classList.add('falling-heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
